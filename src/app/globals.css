@@ -1,0 +1,146 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------
+   Colecta — "Koleksiyon"
+   Base is cool archival board; every dark value is derived from the
+   same ultramarine family as the accent, so nothing reads as generic
+   black-on-white.
+   ------------------------------------------------------------------ */
+@theme {
+  --color-paper: #ecedf3;
+  --color-paper-raised: #f7f8fb;
+  --color-ink: #0d1330;
+  --color-ink-deep: #080c22;
+  --color-ink-muted: #565d7a;
+  --color-ink-faint: #8a90a6;
+  --color-ultra: #2536db;
+  --color-ultra-bright: #4b5bff;
+  --color-edge: #c8cdda;
+  --color-edge-dark: #232a4e;
+
+  --font-display: var(--font-bricolage), "Segoe UI", system-ui, sans-serif;
+  --font-text: var(--font-instrument), "Segoe UI", system-ui, sans-serif;
+
+  /* Modular scale, 1.25 at the small end opening to 1.333 for display */
+  --text-record: 0.8125rem;   /* 13px — catalog record lines */
+  --text-small: 0.9375rem;    /* 15px */
+  --text-body: 1.0625rem;     /* 17px */
+  --text-lead: 1.3125rem;     /* 21px */
+
+  --ease-settle: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    /* header clearance for in-page anchors */
+    scroll-padding-top: 5.5rem;
+  }
+
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-text);
+    font-size: var(--text-body);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background-color: var(--color-ultra);
+    color: #fff;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-ultra);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* Numerals line up in catalog records and year columns */
+  .tnum {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum" 1;
+  }
+}
+
+@layer components {
+  .display {
+    font-family: var(--font-display);
+    font-weight: 620;
+    letter-spacing: -0.03em;
+    line-height: 0.94;
+  }
+
+  /* The one loud gesture on links: an ultramarine rule that draws in */
+  .rule-link {
+    position: relative;
+    display: inline-block;
+  }
+  .rule-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -2px;
+    height: 1px;
+    background-color: currentColor;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.4s var(--ease-settle);
+  }
+  .rule-link:hover::after,
+  .rule-link:focus-visible::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+
+  .hairline {
+    border-color: var(--color-edge);
+  }
+}
+
+/* One orchestrated entrance, used only by the hero. */
+@keyframes line-rise {
+  from {
+    transform: translateY(0.9em);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes vitrine-settle {
+  from {
+    transform: translateY(2rem) scale(0.98);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+.animate-line-rise {
+  animation: line-rise 0.9s var(--ease-settle) both;
+}
+
+.animate-vitrine-settle {
+  animation: vitrine-settle 1.2s var(--ease-settle) 0.25s both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
