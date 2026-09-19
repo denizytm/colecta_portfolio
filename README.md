@@ -140,6 +140,20 @@ tanımlı. Oradaki bir değeri değiştirmek siteyi baştan aşağı etkiler.
 | `--font-display` | Bricolage Grotesque | başlıklar |
 | `--font-text` | Instrument Sans | metin |
 
-Hareket bilinçli olarak az: sayfa açılışında tek bir giriş, işler vitrininde
-imleci takip eden eğim, süreç çizgisinin kaydırmayla dolması, açılır bölümler.
-`prefers-reduced-motion` açık olan cihazlarda hepsi kapanır.
+Hareket parçaları `src/components/motion/` altında toplandı:
+
+| Parça | Nerede |
+| --- | --- |
+| `RevealText` | Başlıklar kelime kelime maskeden çıkar; her başlık bir kez oynar |
+| `ScrollProgress` | Sayfanın en üstündeki ince ilerleme çizgisi |
+| `Magnetic` | Butonların imlece hafifçe yaslanması |
+
+Bunların dışında: hero vitrini kaydırmayla metinden yavaş kayar (paralaks) ve
+imleci takip ederek yatar; işler bandı dar ve köşeleri yuvarlak gelip tam
+genişliğe oturur; katalog künyesi satır satır dolar; hizmet satırlarında
+imlecin geldiği yere kadar ultramarin bir çizgi çekilir; üst menü altından
+geçen bandın rengine göre açık/koyu arasında geçiş yapar.
+
+Hepsi ya kullanıcının hareketine cevap verir ya da bir kez oynayıp durur —
+bölüm başına tekrarlayan giriş animasyonu bilerek yok. `prefers-reduced-motion`
+açık olan cihazlarda tamamı kapanır ve hiçbir metin gizli kalmaz.

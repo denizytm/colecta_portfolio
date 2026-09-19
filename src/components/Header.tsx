@@ -15,13 +15,41 @@ const sections = ["works", "services", "process", "faq"] as const;
 
 export default function Header({ locale, dict }: Props) {
   const [lifted, setLifted] = useState(false);
+  const [onDark, setOnDark] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
+  // The bar takes its colours from whatever band is passing underneath it,
+  // so it never sits as a pale stripe across a dark section.
   useEffect(() => {
-    const onScroll = () => setLifted(window.scrollY > 24);
-    onScroll();
+    let frame = 0;
+
+    const measure = () => {
+      frame = 0;
+      const y = window.scrollY;
+      setLifted(y > 24);
+
+      const line = (window.innerWidth >= 640 ? 80 : 64) / 2;
+      const dark = [...document.querySelectorAll("[data-surface='dark']")].some(
+        (el) => {
+          const r = el.getBoundingClientRect();
+          return r.top <= line && r.bottom >= line;
+        },
+      );
+      setOnDark(dark);
+    };
+
+    const onScroll = () => {
+      if (!frame) frame = requestAnimationFrame(measure);
+    };
+
+    measure();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    window.addEventListener("resize", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      if (frame) cancelAnimationFrame(frame);
+    };
   }, []);
 
   // Lock the page behind the mobile panel.
@@ -43,6 +71,12 @@ export default function Header({ locale, dict }: Props) {
 
   const other: Locale = locale === "tr" ? "en" : "tr";
 
+  const surface = lifted
+    ? onDark
+      ? "border-b border-edge-dark bg-ink/80 backdrop-blur-md"
+      : "border-b border-edge bg-paper/85 backdrop-blur-md"
+    : "border-b border-transparent";
+
   return (
     <>
       <a
@@ -53,11 +87,7 @@ export default function Header({ locale, dict }: Props) {
       </a>
 
       <header
-        className={`fixed inset-x-0 top-0 z-50 transition-colors duration-500 ${
-          lifted
-            ? "border-b border-edge bg-paper/85 backdrop-blur-md"
-            : "border-b border-transparent"
-        }`}
+        className={`fixed inset-x-0 top-0 z-50 transition-colors duration-500 ${surface}`}
       >
         <div className="mx-auto flex h-16 max-w-[88rem] items-center justify-between gap-6 px-5 sm:h-20 sm:px-8 xl:px-12">
           <Link
@@ -65,12 +95,18 @@ export default function Header({ locale, dict }: Props) {
             className="group flex items-baseline gap-2.5"
             aria-label={site.name}
           >
-            <span className="display text-[1.4rem] leading-none text-ink sm:text-[1.6rem]">
+            <span
+              className={`display text-[1.4rem] leading-none transition-colors duration-500 sm:text-[1.6rem] ${
+                onDark ? "text-paper" : "text-ink"
+              }`}
+            >
               {site.wordmark}
             </span>
             <span
               aria-hidden
-              className="h-1.5 w-1.5 translate-y-[-0.15rem] bg-ultra transition-transform duration-500 ease-[cubic-bezier(.22,1,.36,1)] group-hover:translate-y-[-0.55rem]"
+              className={`h-1.5 w-1.5 translate-y-[-0.15rem] transition-[transform,background-color] duration-500 ease-[cubic-bezier(.22,1,.36,1)] group-hover:translate-y-[-0.55rem] ${
+                onDark ? "bg-ultra-bright" : "bg-ultra"
+              }`}
             />
           </Link>
 
@@ -79,7 +115,11 @@ export default function Header({ locale, dict }: Props) {
               <a
                 key={key}
                 href={`#${sectionIds[key]}`}
-                className="rule-link text-small text-ink-muted transition-colors hover:text-ink"
+                className={`rule-link text-small transition-colors duration-500 ${
+                  onDark
+                    ? "text-paper/65 hover:text-paper"
+                    : "text-ink-muted hover:text-ink"
+                }`}
               >
                 {dict.nav[key]}
               </a>
@@ -87,11 +127,20 @@ export default function Header({ locale, dict }: Props) {
           </nav>
 
           <div className="flex items-center gap-5">
-            <LocaleSwitch locale={locale} other={other} dict={dict} />
+            <LocaleSwitch
+              locale={locale}
+              other={other}
+              dict={dict}
+              onDark={onDark}
+            />
 
             <a
               href={`#${sectionIds.contact}`}
-              className="hidden rounded-full bg-ink px-5 py-2.5 text-small text-paper transition-colors duration-300 hover:bg-ultra sm:inline-block"
+              className={`hidden rounded-full px-5 py-2.5 text-small transition-colors duration-300 sm:inline-block ${
+                onDark
+                  ? "bg-paper text-ink hover:bg-ultra-bright hover:text-white"
+                  : "bg-ink text-paper hover:bg-ultra"
+              }`}
             >
               {dict.nav.contact}
             </a>
@@ -104,8 +153,16 @@ export default function Header({ locale, dict }: Props) {
               aria-expanded={menuOpen}
             >
               <span className="relative block h-3 w-6">
-                <span className="absolute inset-x-0 top-0 h-px bg-ink" />
-                <span className="absolute inset-x-0 bottom-0 h-px bg-ink" />
+                <span
+                  className={`absolute inset-x-0 top-0 h-px transition-colors duration-500 ${
+                    onDark ? "bg-paper" : "bg-ink"
+                  }`}
+                />
+                <span
+                  className={`absolute inset-x-0 bottom-0 h-px transition-colors duration-500 ${
+                    onDark ? "bg-paper" : "bg-ink"
+                  }`}
+                />
               </span>
             </button>
           </div>
@@ -174,25 +231,39 @@ function LocaleSwitch({
   locale,
   other,
   dict,
+  onDark,
 }: {
   locale: Locale;
   other: Locale;
   dict: Dictionary;
+  onDark: boolean;
 }) {
   return (
     <div
       className="tnum flex items-center gap-1.5 text-record"
       aria-label={dict.localeSwitch.label}
     >
-      <span className="text-ink" aria-current="true">
+      <span
+        className={`transition-colors duration-500 ${
+          onDark ? "text-paper" : "text-ink"
+        }`}
+        aria-current="true"
+      >
         {locale.toUpperCase()}
       </span>
-      <span aria-hidden className="text-edge">
+      <span
+        aria-hidden
+        className={onDark ? "text-paper/30" : "text-edge"}
+      >
         /
       </span>
       <Link
         href={`/${other}`}
-        className="text-ink-faint transition-colors hover:text-ultra"
+        className={`transition-colors duration-500 ${
+          onDark
+            ? "text-paper/45 hover:text-ultra-bright"
+            : "text-ink-faint hover:text-ultra"
+        }`}
         hrefLang={other}
       >
         {other.toUpperCase()}

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import type { Dictionary } from "@/content/dictionary";
-import { SectionHead } from "./Works";
+import SectionHead from "./SectionHead";
 import { sectionIds } from "@/content/sections";
 
 export default function Faq({ dict }: { dict: Dictionary }) {

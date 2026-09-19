@@ -71,6 +71,13 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale} className={`${display.variable} ${text.variable}`}>
+      <head>
+        <noscript>
+          {/* Masked headings park their words below the clip until motion
+              runs; without scripting they must simply be visible. */}
+          <style>{".reveal-word{transform:none !important}"}</style>
+        </noscript>
+      </head>
       <body>{children}</body>
     </html>
   );

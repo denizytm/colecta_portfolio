@@ -14,7 +14,10 @@ export default function Footer({
   const year = new Date().getFullYear();
 
   return (
-    <footer className="bg-ink-deep pt-20 pb-10 text-paper/60 sm:pt-24">
+    <footer
+      data-surface="dark"
+      className="bg-ink-deep pt-20 pb-10 text-paper/60 sm:pt-24"
+    >
       <div className="mx-auto max-w-[88rem] px-5 sm:px-8 xl:px-12">
         <div className="grid gap-12 border-b border-edge-dark pb-14 sm:grid-cols-2 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)_minmax(0,1fr)]">
           <div>

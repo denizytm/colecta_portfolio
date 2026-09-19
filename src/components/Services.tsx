@@ -1,13 +1,25 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import type { Dictionary } from "@/content/dictionary";
-import { SectionHead } from "./Works";
+import SectionHead from "./SectionHead";
 import { sectionIds } from "@/content/sections";
 
 export default function Services({ dict }: { dict: Dictionary }) {
   const t = dict.services;
   const [open, setOpen] = useState<number | null>(0);
+  const [sweep, setSweep] = useState<{ row: number; amount: number } | null>(
+    null,
+  );
+  const rows = useRef<(HTMLDivElement | null)[]>([]);
+
+  // The rule under a service row tracks how far across it the cursor is.
+  const track = (i: number) => (e: React.PointerEvent) => {
+    const el = rows.current[i];
+    if (!el || e.pointerType !== "mouse") return;
+    const r = el.getBoundingClientRect();
+    setSweep({ row: i, amount: Math.min(1, Math.max(0, (e.clientX - r.left) / r.width)) });
+  };
 
   return (
     <section
@@ -24,7 +36,22 @@ export default function Services({ dict }: { dict: Dictionary }) {
           {t.items.map((item, i) => {
             const expanded = open === i;
             return (
-              <div key={item.name} className="border-b border-edge">
+              <div
+                key={item.name}
+                ref={(el) => {
+                  rows.current[i] = el;
+                }}
+                onPointerMove={track(i)}
+                onPointerLeave={() => setSweep(null)}
+                className="relative border-b border-edge"
+              >
+                <span
+                  aria-hidden
+                  className="pointer-events-none absolute inset-x-0 bottom-0 h-px origin-left bg-ultra transition-transform duration-300 ease-out motion-reduce:hidden"
+                  style={{
+                    transform: `scaleX(${sweep?.row === i ? sweep.amount : 0})`,
+                  }}
+                />
                 <h3>
                   <button
                     type="button"

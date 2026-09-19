@@ -1,7 +1,9 @@
 import type { Dictionary, Locale } from "@/content/dictionary";
 import { works } from "@/content/works";
-import Vitrine from "./Vitrine";
 import { sectionIds } from "@/content/sections";
+import Vitrine from "./Vitrine";
+import RevealText from "./motion/RevealText";
+import Magnetic from "./motion/Magnetic";
 
 export default function Hero({
   locale,
@@ -12,6 +14,11 @@ export default function Hero({
 }) {
   const featured = works[0];
 
+  // One choreography on arrival: the headline sets itself word by word, then
+  // the sentence and the controls follow it in.
+  const wordsInFirstLine = dict.hero.lines[0].split(" ").length;
+  const secondLineDelay = wordsInFirstLine * 0.055;
+
   return (
     <section className="relative overflow-hidden pt-28 sm:pt-36 xl:pt-44">
       <div className="mx-auto max-w-[88rem] px-5 sm:px-8 xl:px-12">
@@ -19,40 +26,43 @@ export default function Hero({
           <div>
             <h1 className="display text-[clamp(2.9rem,8.4vw,7rem)] text-ink">
               {dict.hero.lines.map((line, i) => (
-                <span key={line} className="block overflow-hidden pb-[0.08em]">
-                  <span
-                    className="animate-line-rise block"
-                    style={{ animationDelay: `${i * 110}ms` }}
-                  >
-                    {line}
-                  </span>
-                </span>
+                <RevealText
+                  key={line}
+                  as="span"
+                  text={line}
+                  delay={i === 0 ? 0.1 : 0.1 + secondLineDelay}
+                  className="block"
+                />
               ))}
             </h1>
 
             <p
               className="animate-line-rise mt-8 max-w-[46ch] text-lead text-ink-muted"
-              style={{ animationDelay: "320ms" }}
+              style={{ animationDelay: "560ms" }}
             >
               {dict.hero.lead}
             </p>
 
             <div
               className="animate-line-rise mt-10 flex flex-wrap items-center gap-4"
-              style={{ animationDelay: "420ms" }}
+              style={{ animationDelay: "680ms" }}
             >
-              <a
-                href={`#${sectionIds.contact}`}
-                className="rounded-full bg-ultra px-7 py-3.5 text-body text-white transition-colors duration-300 hover:bg-ink"
-              >
-                {dict.hero.primaryCta}
-              </a>
-              <a
-                href={`#${sectionIds.works}`}
-                className="rule-link px-1 py-3.5 text-body text-ink"
-              >
-                {dict.hero.secondaryCta}
-              </a>
+              <Magnetic>
+                <a
+                  href={`#${sectionIds.contact}`}
+                  className="inline-block rounded-full bg-ultra px-7 py-3.5 text-body text-white transition-colors duration-300 hover:bg-ink"
+                >
+                  {dict.hero.primaryCta}
+                </a>
+              </Magnetic>
+              <Magnetic strength={0.2}>
+                <a
+                  href={`#${sectionIds.works}`}
+                  className="rule-link inline-block px-1 py-3.5 text-body text-ink"
+                >
+                  {dict.hero.secondaryCta}
+                </a>
+              </Magnetic>
             </div>
           </div>
 

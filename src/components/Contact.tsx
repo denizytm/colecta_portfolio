@@ -4,6 +4,8 @@ import { useState } from "react";
 import type { Dictionary, Locale } from "@/content/dictionary";
 import { site, whatsappUrl } from "@/config/site";
 import { sectionIds } from "@/content/sections";
+import RevealText from "./motion/RevealText";
+import Magnetic from "./motion/Magnetic";
 
 type Status = "idle" | "sending" | "sent" | "failed";
 
@@ -39,6 +41,7 @@ export default function Contact({
   return (
     <section
       id={sectionIds.contact}
+      data-surface="dark"
       className="bg-ink py-24 text-paper sm:py-32"
       aria-labelledby="contact-title"
     >
@@ -46,24 +49,27 @@ export default function Contact({
         <div className="grid gap-14 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1fr)] lg:gap-20">
           <div>
             <p className="text-record text-ultra-bright">{t.kicker}</p>
-            <h2
+            <RevealText
+              as="h2"
               id="contact-title"
+              text={t.title}
+              delay={0.08}
               className="display mt-3 text-[clamp(2.1rem,5.4vw,3.75rem)] text-paper"
-            >
-              {t.title}
-            </h2>
+            />
             <p className="mt-6 max-w-[42ch] text-lead text-paper/60">
               {t.lead}
             </p>
 
-            <a
-              href={whatsappUrl(t.whatsappPrefill)}
-              target="_blank"
-              rel="noreferrer"
-              className="mt-9 inline-block rounded-full bg-paper px-7 py-3.5 text-body text-ink transition-colors duration-300 hover:bg-ultra-bright hover:text-white"
-            >
-              {t.whatsapp}
-            </a>
+            <Magnetic className="mt-9">
+              <a
+                href={whatsappUrl(t.whatsappPrefill)}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-block rounded-full bg-paper px-7 py-3.5 text-body text-ink transition-colors duration-300 hover:bg-ultra-bright hover:text-white"
+              >
+                {t.whatsapp}
+              </a>
+            </Magnetic>
 
             <dl className="mt-12 border-t border-edge-dark text-small">
               <DirectRow label={t.emailLabel}>
@@ -157,13 +163,15 @@ export default function Contact({
             </Field>
 
             <div className="flex flex-wrap items-center gap-5">
-              <button
-                type="submit"
-                disabled={status === "sending"}
-                className="rounded-full bg-ultra-bright px-7 py-3.5 text-body text-white transition-colors duration-300 hover:bg-paper hover:text-ink disabled:opacity-60"
-              >
-                {status === "sending" ? t.form.submitting : t.form.submit}
-              </button>
+              <Magnetic>
+                <button
+                  type="submit"
+                  disabled={status === "sending"}
+                  className="rounded-full bg-ultra-bright px-7 py-3.5 text-body text-white transition-colors duration-300 hover:bg-paper hover:text-ink disabled:opacity-60"
+                >
+                  {status === "sending" ? t.form.submitting : t.form.submit}
+                </button>
+              </Magnetic>
 
               <p
                 role="status"

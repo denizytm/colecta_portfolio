@@ -9,7 +9,7 @@ import {
   useTransform,
 } from "motion/react";
 import type { Dictionary } from "@/content/dictionary";
-import { SectionHead } from "./Works";
+import SectionHead from "./SectionHead";
 import { sectionIds } from "@/content/sections";
 
 export default function Process({ dict }: { dict: Dictionary }) {

@@ -10,6 +10,7 @@ import Process from "@/components/Process";
 import Faq from "@/components/Faq";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
+import ScrollProgress from "@/components/motion/ScrollProgress";
 
 export default async function Page({
   params,
@@ -55,6 +56,7 @@ export default async function Page({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      <ScrollProgress />
       <Header locale={locale} dict={dict} />
       <main id="main">
         <Hero locale={locale} dict={dict} />
