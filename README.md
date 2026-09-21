@@ -136,13 +136,18 @@ Renk, yazı tipi ve ölçek `src/app/globals.css` içindeki `@theme` bloğunda
 tanımlı. Oradaki bir değeri değiştirmek siteyi baştan aşağı etkiler.
 
 Palet ve yazı tipi **`images/logo.jpeg`** içindeki marka panosundan geliyor.
-Site koyu lacivert üzerine kurulu; tek açık bant iletişim bölümü.
+Site koyu morcivert üzerine kurulu; tek açık bant iletişim bölümü.
+
+Zemin tonları, marka indigo'sunun (`#6366f1`) koyuya çekilmiş hâlleri. Panodaki
+`#0f172a` / `#1e293b` yerine bilerek mor tarafa açıldı; daha koyu isterseniz
+`#1a1b3c` / `#21224d`, daha açık isterseniz `#28295f` / `#303172` çiftini
+kullanın — ikisi de `globals.css` içindeki `@theme` bloğunda tek satır.
 
 | Belirteç | Değer | Nerede |
 | --- | --- | --- |
-| `--color-ink` | `#0f172a` | sayfa zemini |
-| `--color-ink-raised` | `#1e293b` | İşler ve Süreç bantları |
-| `--color-ink-deep` | `#080d1a` | alt bilgi |
+| `--color-ink` | `#21224d` | sayfa zemini |
+| `--color-ink-raised` | `#28295f` | İşler ve Süreç bantları |
+| `--color-ink-deep` | `#1a1b3c` | alt bilgi |
 | `--color-paper` | `#e2e8f0` | koyu zeminde metin + iletişim bandı |
 | `--color-paper-muted` | `#94a3b8` | koyu zeminde ikincil metin |
 | `--color-ultra` | `#6366f1` | marka aksanı |

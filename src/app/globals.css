@@ -5,9 +5,12 @@
      Marka paleti — images/logo.jpeg içindeki marka panosundan.
      Site koyu lacivert üzerine kurulu; açık bant yalnızca iletişimde.
      ------------------------------------------------------------------ */
-  --color-ink: #0f172a;          /* sayfa zemini */
-  --color-ink-raised: #1e293b;   /* yükseltilmiş bantlar */
-  --color-ink-deep: #080d1a;     /* alt bilgi */
+  /* Zemin tonları, marka indigo'sunun (#6366f1) koyuya çekilmiş hâlleri —
+     böylece sayfa aksanla aynı renk ailesinde kalıyor, nötr bir gri-lacivert
+     olmuyor. Panodaki #0f172a / #1e293b'den bilerek mor tarafa açıldı. */
+  --color-ink: #21224d;          /* sayfa zemini */
+  --color-ink-raised: #28295f;   /* yükseltilmiş bantlar */
+  --color-ink-deep: #1a1b3c;     /* alt bilgi */
   --color-ink-muted: #475569;    /* açık bantta ikincil metin */
   --color-ink-faint: #64748b;
 
@@ -20,7 +23,7 @@
   --color-ultra-deep: #4f46e5;   /* açık zeminde aksan metin */
 
   --color-edge: #cbd5e1;         /* açık zeminde saç çizgisi */
-  --color-edge-dark: #2a3550;    /* koyu zeminde saç çizgisi */
+  --color-edge-dark: #333472;    /* koyu zeminde saç çizgisi */
 
   --font-display: var(--font-sora), "Segoe UI", system-ui, sans-serif;
   --font-text: var(--font-instrument), "Segoe UI", system-ui, sans-serif;
