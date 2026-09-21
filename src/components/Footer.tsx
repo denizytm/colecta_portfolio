@@ -24,13 +24,16 @@ export default function Footer({
             <p className="display text-[clamp(2.5rem,7vw,4.5rem)] leading-none text-paper">
               {site.wordmark}
             </p>
+            <p className="mt-3 text-small text-ultra-bright" lang="en">
+              {site.tagline}
+            </p>
             <p className="mt-4 max-w-[28ch] text-small">
               {dict.footer.tagline}
             </p>
           </div>
 
           <nav aria-label={dict.footer.sections}>
-            <p className="text-record text-paper/35">{dict.footer.sections}</p>
+            <p className="text-record text-paper-muted">{dict.footer.sections}</p>
             <ul className="mt-4 space-y-2.5">
               {navKeys.map((key) => (
                 <li key={key}>
@@ -46,7 +49,7 @@ export default function Footer({
           </nav>
 
           <div>
-            <p className="text-record text-paper/35">{dict.footer.reach}</p>
+            <p className="text-record text-paper-muted">{dict.footer.reach}</p>
             <ul className="mt-4 space-y-2.5 text-small">
               <li>
                 <a
@@ -78,7 +81,7 @@ export default function Footer({
           </div>
         </div>
 
-        <div className="tnum flex flex-wrap items-center justify-between gap-4 pt-7 text-record text-paper/35">
+        <div className="tnum flex flex-wrap items-center justify-between gap-4 pt-7 text-record text-paper-muted">
           <p>
             © {year} {site.name}. {dict.footer.rights}
           </p>

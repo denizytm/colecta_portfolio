@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { Bricolage_Grotesque, Instrument_Sans } from "next/font/google";
+import { Instrument_Sans, Sora } from "next/font/google";
 import "../globals.css";
 import {
   getDictionary,
@@ -10,9 +10,10 @@ import {
 } from "@/content/dictionary";
 import { site } from "@/config/site";
 
-const display = Bricolage_Grotesque({
+// Sora is the typeface named on the brand board.
+const display = Sora({
   subsets: ["latin", "latin-ext"],
-  variable: "--font-bricolage",
+  variable: "--font-sora",
   display: "swap",
 });
 

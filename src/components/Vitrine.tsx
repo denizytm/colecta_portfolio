@@ -74,15 +74,15 @@ export default function Vitrine({
           }}
         >
           {/* Browser chrome — the address bar carries the real URL, not decoration */}
-          <div className="overflow-hidden rounded-xl border border-edge bg-paper-raised shadow-[0_30px_70px_-35px_rgba(13,19,48,0.55)]">
-            <div className="flex items-center gap-3 border-b border-edge px-4 py-3">
+          <div className="overflow-hidden rounded-xl border border-edge-dark bg-ink-raised shadow-[0_40px_90px_-40px_rgba(0,0,0,0.75)]">
+            <div className="flex items-center gap-3 border-b border-edge-dark px-4 py-3">
               <span className="flex gap-1.5" aria-hidden>
-                <span className="h-2 w-2 rounded-full bg-edge" />
-                <span className="h-2 w-2 rounded-full bg-edge" />
-                <span className="h-2 w-2 rounded-full bg-edge" />
+                <span className="h-2 w-2 rounded-full bg-edge-dark" />
+                <span className="h-2 w-2 rounded-full bg-edge-dark" />
+                <span className="h-2 w-2 rounded-full bg-edge-dark" />
               </span>
               {host && (
-                <span className="truncate rounded bg-paper px-2.5 py-1 text-record text-ink-muted">
+                <span className="truncate rounded bg-ink px-2.5 py-1 text-record text-paper-muted">
                   {host}
                 </span>
               )}
@@ -90,7 +90,7 @@ export default function Vitrine({
 
             <div
               className={`relative aspect-[16/10] ${
-                work.imageFit === "contain" ? "bg-ink-deep" : "bg-paper"
+                work.imageFit === "contain" ? "bg-ink-deep" : "bg-ink-deep"
               }`}
             >
               <Image
@@ -109,17 +109,17 @@ export default function Vitrine({
             className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2"
             style={{ transform: "translateZ(40px)" }}
           >
-            <span className="tnum bg-ultra px-2.5 py-1 text-record text-white">
+            <span className="tnum bg-ultra-deep px-2.5 py-1 text-record text-white">
               K-{String(work.no).padStart(2, "0")}
             </span>
-            <span className="text-small text-ink">{work.client}</span>
-            <span className="tnum text-small text-ink-faint">{work.year}</span>
+            <span className="text-small text-paper">{work.client}</span>
+            <span className="tnum text-small text-paper-muted">{work.year}</span>
             {work.href && (
               <a
                 href={work.href}
                 target="_blank"
                 rel="noreferrer"
-                className="rule-link ml-auto text-small text-ultra"
+                className="rule-link ml-auto text-small text-ultra-bright"
               >
                 {visitLabel}
               </a>

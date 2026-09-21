@@ -47,11 +47,11 @@ export default function Works({
           borderTopLeftRadius: corner,
           borderTopRightRadius: corner,
         }}
-        className="pointer-events-none absolute inset-0 -z-10 origin-top bg-ink"
+        className="pointer-events-none absolute inset-0 -z-10 origin-top bg-ink-raised"
       />
 
       <div className="relative mx-auto max-w-[88rem] px-5 sm:px-8 xl:px-12">
-        <SectionHead kicker={t.kicker} title={t.title} lead={t.lead} onDark />
+        <SectionHead kicker={t.kicker} title={t.title} lead={t.lead} />
 
         <div className="mt-16 space-y-24 sm:mt-20 sm:space-y-32">
           {works.map((work) => (
@@ -68,7 +68,7 @@ export default function Works({
               >
                 <div
                   className={`relative aspect-[16/10] ${
-                    work.imageFit === "contain" ? "" : "bg-paper"
+                    work.imageFit === "contain" ? "" : "bg-ink-deep"
                   }`}
                 >
                   <Image
@@ -125,7 +125,7 @@ export default function Works({
                       }}
                       className="grid grid-cols-[9rem_minmax(0,1fr)] gap-4 border-b border-edge-dark py-3 sm:grid-cols-[11rem_minmax(0,1fr)]"
                     >
-                      <dt className="text-paper/40">{label}</dt>
+                      <dt className="text-paper-muted">{label}</dt>
                       <dd className="text-paper/85">{value}</dd>
                     </motion.div>
                   ))}

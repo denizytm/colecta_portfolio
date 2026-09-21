@@ -1,24 +1,28 @@
 @import "tailwindcss";
 
-/* ------------------------------------------------------------------
-   Colecta — "Koleksiyon"
-   Base is cool archival board; every dark value is derived from the
-   same ultramarine family as the accent, so nothing reads as generic
-   black-on-white.
-   ------------------------------------------------------------------ */
 @theme {
-  --color-paper: #ecedf3;
-  --color-paper-raised: #f7f8fb;
-  --color-ink: #0d1330;
-  --color-ink-deep: #080c22;
-  --color-ink-muted: #565d7a;
-  --color-ink-faint: #8a90a6;
-  --color-ultra: #2536db;
-  --color-ultra-bright: #4b5bff;
-  --color-edge: #c8cdda;
-  --color-edge-dark: #232a4e;
+  /* ------------------------------------------------------------------
+     Marka paleti — images/logo.jpeg içindeki marka panosundan.
+     Site koyu lacivert üzerine kurulu; açık bant yalnızca iletişimde.
+     ------------------------------------------------------------------ */
+  --color-ink: #0f172a;          /* sayfa zemini */
+  --color-ink-raised: #1e293b;   /* yükseltilmiş bantlar */
+  --color-ink-deep: #080d1a;     /* alt bilgi */
+  --color-ink-muted: #475569;    /* açık bantta ikincil metin */
+  --color-ink-faint: #64748b;
 
-  --font-display: var(--font-bricolage), "Segoe UI", system-ui, sans-serif;
+  --color-paper: #e2e8f0;        /* açık bant + koyu zeminde ana metin */
+  --color-paper-raised: #eef2f7; /* açık bantta yükseltilmiş yüzey */
+  --color-paper-muted: #94a3b8;  /* koyu zeminde ikincil metin */
+
+  --color-ultra: #6366f1;        /* aksan — dolgular */
+  --color-ultra-bright: #818cf8; /* koyu zeminde aksan metin */
+  --color-ultra-deep: #4f46e5;   /* açık zeminde aksan metin */
+
+  --color-edge: #cbd5e1;         /* açık zeminde saç çizgisi */
+  --color-edge-dark: #2a3550;    /* koyu zeminde saç çizgisi */
+
+  --font-display: var(--font-sora), "Segoe UI", system-ui, sans-serif;
   --font-text: var(--font-instrument), "Segoe UI", system-ui, sans-serif;
 
   /* Modular scale, 1.25 at the small end opening to 1.333 for display */
@@ -38,8 +42,8 @@
   }
 
   body {
-    background-color: var(--color-paper);
-    color: var(--color-ink);
+    background-color: var(--color-ink);
+    color: var(--color-paper);
     font-family: var(--font-text);
     font-size: var(--text-body);
     line-height: 1.6;
@@ -53,7 +57,7 @@
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-ultra);
+    outline: 2px solid var(--color-ultra-bright);
     outline-offset: 3px;
     border-radius: 2px;
   }
@@ -68,9 +72,9 @@
 @layer components {
   .display {
     font-family: var(--font-display);
-    font-weight: 620;
-    letter-spacing: -0.03em;
-    line-height: 0.94;
+    font-weight: 600;
+    letter-spacing: -0.035em;
+    line-height: 0.98;
   }
 
   /* The one loud gesture on links: an ultramarine rule that draws in */

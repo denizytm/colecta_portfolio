@@ -32,7 +32,7 @@ export default function Services({ dict }: { dict: Dictionary }) {
           <SectionHead kicker={t.kicker} title={t.title} lead={t.lead} />
         </div>
 
-        <div className="mt-14 border-t border-edge sm:mt-20">
+        <div className="mt-14 border-t border-edge-dark sm:mt-20">
           {t.items.map((item, i) => {
             const expanded = open === i;
             return (
@@ -43,11 +43,11 @@ export default function Services({ dict }: { dict: Dictionary }) {
                 }}
                 onPointerMove={track(i)}
                 onPointerLeave={() => setSweep(null)}
-                className="relative border-b border-edge"
+                className="relative border-b border-edge-dark"
               >
                 <span
                   aria-hidden
-                  className="pointer-events-none absolute inset-x-0 bottom-0 h-px origin-left bg-ultra transition-transform duration-300 ease-out motion-reduce:hidden"
+                  className="pointer-events-none absolute inset-x-0 bottom-0 h-px origin-left bg-ultra-bright transition-transform duration-300 ease-out motion-reduce:hidden"
                   style={{
                     transform: `scaleX(${sweep?.row === i ? sweep.amount : 0})`,
                   }}
@@ -60,20 +60,20 @@ export default function Services({ dict }: { dict: Dictionary }) {
                     aria-controls={`service-panel-${i}`}
                     className="group grid w-full grid-cols-[minmax(0,1fr)_auto] items-start gap-6 py-8 text-left sm:grid-cols-[minmax(0,0.9fr)_minmax(0,1fr)_auto] sm:gap-10 sm:py-10"
                   >
-                    <span className="display text-[clamp(1.6rem,3.6vw,2.5rem)] text-ink transition-colors duration-300 group-hover:text-ultra">
+                    <span className="display text-[clamp(1.6rem,3.6vw,2.5rem)] text-paper transition-colors duration-300 group-hover:text-ultra-bright">
                       {item.name}
                     </span>
-                    <span className="hidden max-w-[42ch] self-center text-body text-ink-muted sm:block">
+                    <span className="hidden max-w-[42ch] self-center text-body text-paper-muted sm:block">
                       {item.tagline}
                     </span>
                     <span
                       aria-hidden
-                      className="mt-2 flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-edge transition-colors duration-300 group-hover:border-ultra sm:mt-3"
+                      className="mt-2 flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-edge-dark transition-colors duration-300 group-hover:border-ultra-bright sm:mt-3"
                     >
                       <span className="relative block h-3 w-3">
-                        <span className="absolute left-0 top-1/2 h-px w-3 -translate-y-1/2 bg-ink" />
+                        <span className="absolute left-0 top-1/2 h-px w-3 -translate-y-1/2 bg-paper" />
                         <span
-                          className="absolute left-1/2 top-0 h-3 w-px -translate-x-1/2 bg-ink transition-transform duration-400 ease-[cubic-bezier(.22,1,.36,1)]"
+                          className="absolute left-1/2 top-0 h-3 w-px -translate-x-1/2 bg-paper transition-transform duration-400 ease-[cubic-bezier(.22,1,.36,1)]"
                           style={{
                             transform: `translateX(-50%) scaleY(${expanded ? 0 : 1})`,
                           }}
@@ -96,21 +96,21 @@ export default function Services({ dict }: { dict: Dictionary }) {
                         transition: "opacity 400ms ease",
                       }}
                     >
-                      <p className="max-w-[40ch] text-body text-ink-muted sm:hidden">
+                      <p className="max-w-[40ch] text-body text-paper-muted sm:hidden">
                         {item.tagline}
                       </p>
-                      <p className="max-w-[42ch] text-body text-ink-muted">
+                      <p className="max-w-[42ch] text-body text-paper-muted">
                         {item.body}
                       </p>
                       <ul className="grid gap-x-8 gap-y-2.5 sm:grid-cols-2">
                         {item.includes.map((line) => (
                           <li
                             key={line}
-                            className="flex gap-3 text-small text-ink"
+                            className="flex gap-3 text-small text-paper"
                           >
                             <span
                               aria-hidden
-                              className="mt-[0.6em] h-1 w-1 shrink-0 bg-ultra"
+                              className="mt-[0.6em] h-1 w-1 shrink-0 bg-ultra-bright"
                             />
                             {line}
                           </li>
@@ -124,12 +124,12 @@ export default function Services({ dict }: { dict: Dictionary }) {
           })}
         </div>
 
-        <div className="mt-14 rounded-xl bg-paper-raised px-7 py-9 sm:px-10 sm:py-11">
-          <p className="display text-[1.35rem] text-ink">{t.includedTitle}</p>
+        <div className="mt-14 rounded-xl bg-ink-raised px-7 py-9 sm:px-10 sm:py-11">
+          <p className="display text-[1.35rem] text-paper">{t.includedTitle}</p>
           <ul className="mt-5 grid gap-x-10 gap-y-3 sm:grid-cols-2 lg:grid-cols-3">
             {t.included.map((line) => (
-              <li key={line} className="flex gap-3 text-small text-ink-muted">
-                <span aria-hidden className="mt-[0.6em] h-1 w-1 shrink-0 bg-ultra" />
+              <li key={line} className="flex gap-3 text-small text-paper-muted">
+                <span aria-hidden className="mt-[0.6em] h-1 w-1 shrink-0 bg-ultra-bright" />
                 {line}
               </li>
             ))}

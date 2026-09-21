@@ -9,7 +9,9 @@
 
 export const site = {
   name: "Colecta",
-  wordmark: "colecta",
+  wordmark: "Colecta",
+  /** Marka panosundaki slogan. */
+  tagline: "Build Together. Go Further.",
 
   /** Yayına alınacak alan adı. OG etiketleri ve sitemap bunu kullanır. */
   url: "https://colecta.com.tr", // TODO: gerçek alan adı

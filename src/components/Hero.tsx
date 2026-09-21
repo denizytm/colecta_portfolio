@@ -2,6 +2,7 @@ import type { Dictionary, Locale } from "@/content/dictionary";
 import { works } from "@/content/works";
 import { sectionIds } from "@/content/sections";
 import Vitrine from "./Vitrine";
+import Ribbon from "./Ribbon";
 import RevealText from "./motion/RevealText";
 import Magnetic from "./motion/Magnetic";
 
@@ -21,10 +22,12 @@ export default function Hero({
 
   return (
     <section className="relative overflow-hidden pt-28 sm:pt-36 xl:pt-44">
+      <Ribbon />
+
       <div className="mx-auto max-w-[88rem] px-5 sm:px-8 xl:px-12">
         <div className="grid items-center gap-14 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.92fr)] lg:gap-16">
           <div>
-            <h1 className="display text-[clamp(2.9rem,8.4vw,7rem)] text-ink">
+            <h1 className="display text-[clamp(2.9rem,8.4vw,7rem)] text-paper">
               {dict.hero.lines.map((line, i) => (
                 <RevealText
                   key={line}
@@ -37,7 +40,7 @@ export default function Hero({
             </h1>
 
             <p
-              className="animate-line-rise mt-8 max-w-[46ch] text-lead text-ink-muted"
+              className="animate-line-rise mt-8 max-w-[46ch] text-lead text-paper-muted"
               style={{ animationDelay: "560ms" }}
             >
               {dict.hero.lead}
@@ -50,7 +53,7 @@ export default function Hero({
               <Magnetic>
                 <a
                   href={`#${sectionIds.contact}`}
-                  className="inline-block rounded-full bg-ultra px-7 py-3.5 text-body text-white transition-colors duration-300 hover:bg-ink"
+                  className="inline-block rounded-full bg-ultra-deep px-7 py-3.5 text-body text-white transition-colors duration-300 hover:bg-paper hover:text-ink"
                 >
                   {dict.hero.primaryCta}
                 </a>
@@ -58,7 +61,7 @@ export default function Hero({
               <Magnetic strength={0.2}>
                 <a
                   href={`#${sectionIds.works}`}
-                  className="rule-link inline-block px-1 py-3.5 text-body text-ink"
+                  className="rule-link inline-block px-1 py-3.5 text-body text-paper"
                 >
                   {dict.hero.secondaryCta}
                 </a>
@@ -80,14 +83,14 @@ export default function Hero({
 
       {/* What we make, as three ruled cells rather than a decorative strip */}
       <div className="mx-auto mt-20 max-w-[88rem] px-5 sm:mt-28 sm:px-8 xl:px-12">
-        <ul className="grid border-t border-edge sm:grid-cols-3">
+        <ul className="grid border-t border-edge-dark sm:grid-cols-3">
           {dict.services.items.map((item) => (
             <li
               key={item.name}
-              className="border-b border-edge px-1 py-6 sm:border-b-0 sm:border-r sm:px-6 sm:py-7 sm:first:pl-1 sm:last:border-r-0"
+              className="border-b border-edge-dark px-1 py-6 sm:border-b-0 sm:border-r sm:px-6 sm:py-7 sm:first:pl-1 sm:last:border-r-0"
             >
-              <p className="display text-[1.35rem] text-ink">{item.name}</p>
-              <p className="mt-1.5 max-w-[34ch] text-small text-ink-muted">
+              <p className="display text-[1.35rem] text-paper">{item.name}</p>
+              <p className="mt-1.5 max-w-[34ch] text-small text-paper-muted">
                 {item.tagline}
               </p>
             </li>

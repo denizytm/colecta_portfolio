@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import type { Dictionary, Locale } from "@/content/dictionary";
@@ -15,27 +16,26 @@ const sections = ["works", "services", "process", "faq"] as const;
 
 export default function Header({ locale, dict }: Props) {
   const [lifted, setLifted] = useState(false);
-  const [onDark, setOnDark] = useState(false);
+  const [onLight, setOnLight] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
-  // The bar takes its colours from whatever band is passing underneath it,
-  // so it never sits as a pale stripe across a dark section.
+  // The page ground is dark, so the bar is light by default and flips only
+  // while the one light band is passing underneath it.
   useEffect(() => {
     let frame = 0;
 
     const measure = () => {
       frame = 0;
-      const y = window.scrollY;
-      setLifted(y > 24);
+      setLifted(window.scrollY > 24);
 
       const line = (window.innerWidth >= 640 ? 80 : 64) / 2;
-      const dark = [...document.querySelectorAll("[data-surface='dark']")].some(
-        (el) => {
-          const r = el.getBoundingClientRect();
-          return r.top <= line && r.bottom >= line;
-        },
-      );
-      setOnDark(dark);
+      const light = [
+        ...document.querySelectorAll("[data-surface='light']"),
+      ].some((el) => {
+        const r = el.getBoundingClientRect();
+        return r.top <= line && r.bottom >= line;
+      });
+      setOnLight(light);
     };
 
     const onScroll = () => {
@@ -72,16 +72,16 @@ export default function Header({ locale, dict }: Props) {
   const other: Locale = locale === "tr" ? "en" : "tr";
 
   const surface = lifted
-    ? onDark
-      ? "border-b border-edge-dark bg-ink/80 backdrop-blur-md"
-      : "border-b border-edge bg-paper/85 backdrop-blur-md"
+    ? onLight
+      ? "border-b border-edge bg-paper/85 backdrop-blur-md"
+      : "border-b border-edge-dark bg-ink/80 backdrop-blur-md"
     : "border-b border-transparent";
 
   return (
     <>
       <a
         href="#main"
-        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-ultra focus:px-5 focus:py-2 focus:text-small focus:text-white"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-ultra-deep focus:px-5 focus:py-2 focus:text-small focus:text-white"
       >
         {dict.nav.skipToContent}
       </a>
@@ -92,22 +92,24 @@ export default function Header({ locale, dict }: Props) {
         <div className="mx-auto flex h-16 max-w-[88rem] items-center justify-between gap-6 px-5 sm:h-20 sm:px-8 xl:px-12">
           <Link
             href={`/${locale}`}
-            className="group flex items-baseline gap-2.5"
+            className="group flex items-center gap-2.5"
             aria-label={site.name}
           >
+            <Image
+              src="/brand/colecta-mark.png"
+              alt=""
+              width={256}
+              height={256}
+              priority
+              className="h-7 w-7 transition-transform duration-500 ease-[cubic-bezier(.22,1,.36,1)] group-hover:scale-110 sm:h-8 sm:w-8"
+            />
             <span
-              className={`display text-[1.4rem] leading-none transition-colors duration-500 sm:text-[1.6rem] ${
-                onDark ? "text-paper" : "text-ink"
+              className={`display text-[1.35rem] font-normal leading-none transition-colors duration-500 sm:text-[1.55rem] ${
+                onLight ? "text-ink" : "text-paper"
               }`}
             >
               {site.wordmark}
             </span>
-            <span
-              aria-hidden
-              className={`h-1.5 w-1.5 translate-y-[-0.15rem] transition-[transform,background-color] duration-500 ease-[cubic-bezier(.22,1,.36,1)] group-hover:translate-y-[-0.55rem] ${
-                onDark ? "bg-ultra-bright" : "bg-ultra"
-              }`}
-            />
           </Link>
 
           <nav className="hidden items-center gap-8 lg:flex">
@@ -116,9 +118,9 @@ export default function Header({ locale, dict }: Props) {
                 key={key}
                 href={`#${sectionIds[key]}`}
                 className={`rule-link text-small transition-colors duration-500 ${
-                  onDark
-                    ? "text-paper/65 hover:text-paper"
-                    : "text-ink-muted hover:text-ink"
+                  onLight
+                    ? "text-ink-muted hover:text-ink"
+                    : "text-paper-muted hover:text-paper"
                 }`}
               >
                 {dict.nav[key]}
@@ -131,15 +133,13 @@ export default function Header({ locale, dict }: Props) {
               locale={locale}
               other={other}
               dict={dict}
-              onDark={onDark}
+              onLight={onLight}
             />
 
             <a
               href={`#${sectionIds.contact}`}
-              className={`hidden rounded-full px-5 py-2.5 text-small transition-colors duration-300 sm:inline-block ${
-                onDark
-                  ? "bg-paper text-ink hover:bg-ultra-bright hover:text-white"
-                  : "bg-ink text-paper hover:bg-ultra"
+              className={`hidden rounded-full px-5 py-2.5 text-small transition-colors duration-300 hover:bg-ultra-deep hover:text-white sm:inline-block ${
+                onLight ? "bg-ink text-paper" : "bg-paper text-ink"
               }`}
             >
               {dict.nav.contact}
@@ -155,12 +155,12 @@ export default function Header({ locale, dict }: Props) {
               <span className="relative block h-3 w-6">
                 <span
                   className={`absolute inset-x-0 top-0 h-px transition-colors duration-500 ${
-                    onDark ? "bg-paper" : "bg-ink"
+                    onLight ? "bg-ink" : "bg-paper"
                   }`}
                 />
                 <span
                   className={`absolute inset-x-0 bottom-0 h-px transition-colors duration-500 ${
-                    onDark ? "bg-paper" : "bg-ink"
+                    onLight ? "bg-ink" : "bg-paper"
                   }`}
                 />
               </span>
@@ -171,18 +171,27 @@ export default function Header({ locale, dict }: Props) {
 
       {/* Mobile panel */}
       <div
-        className={`fixed inset-0 z-[55] bg-ink transition-[opacity,visibility] duration-400 lg:hidden ${
+        className={`fixed inset-0 z-[55] bg-ink-deep transition-[opacity,visibility] duration-400 lg:hidden ${
           menuOpen ? "visible opacity-100" : "invisible opacity-0"
         }`}
       >
         <div className="flex h-16 items-center justify-between px-5 sm:h-20 sm:px-8">
-          <span className="display text-[1.4rem] leading-none text-paper">
-            {site.wordmark}
+          <span className="flex items-center gap-2.5">
+            <Image
+              src="/brand/colecta-mark.png"
+              alt=""
+              width={256}
+              height={256}
+              className="h-7 w-7"
+            />
+            <span className="display text-[1.35rem] font-normal leading-none text-paper">
+              {site.wordmark}
+            </span>
           </span>
           <button
             type="button"
             onClick={() => setMenuOpen(false)}
-            className="text-small text-paper/70"
+            className="text-small text-paper-muted"
           >
             {dict.nav.close}
           </button>
@@ -209,7 +218,7 @@ export default function Header({ locale, dict }: Props) {
           ))}
         </nav>
 
-        <div className="px-5 pt-10 text-small text-paper/60 sm:px-8">
+        <div className="px-5 pt-10 text-small text-paper-muted sm:px-8">
           <a href={`mailto:${site.email}`} className="rule-link block w-fit">
             {site.email}
           </a>
@@ -231,12 +240,12 @@ function LocaleSwitch({
   locale,
   other,
   dict,
-  onDark,
+  onLight,
 }: {
   locale: Locale;
   other: Locale;
   dict: Dictionary;
-  onDark: boolean;
+  onLight: boolean;
 }) {
   return (
     <div
@@ -245,24 +254,21 @@ function LocaleSwitch({
     >
       <span
         className={`transition-colors duration-500 ${
-          onDark ? "text-paper" : "text-ink"
+          onLight ? "text-ink" : "text-paper"
         }`}
         aria-current="true"
       >
         {locale.toUpperCase()}
       </span>
-      <span
-        aria-hidden
-        className={onDark ? "text-paper/30" : "text-edge"}
-      >
+      <span aria-hidden className={onLight ? "text-edge" : "text-paper-muted"}>
         /
       </span>
       <Link
         href={`/${other}`}
         className={`transition-colors duration-500 ${
-          onDark
-            ? "text-paper/45 hover:text-ultra-bright"
-            : "text-ink-faint hover:text-ultra"
+          onLight
+            ? "text-ink-faint hover:text-ultra-deep"
+            : "text-paper-muted hover:text-ultra-bright"
         }`}
         hrefLang={other}
       >

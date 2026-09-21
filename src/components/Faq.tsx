@@ -20,11 +20,11 @@ export default function Faq({ dict }: { dict: Dictionary }) {
           <SectionHead kicker={t.kicker} title={t.title} />
         </div>
 
-        <div className="mt-12 max-w-[64rem] border-t border-edge sm:mt-16">
+        <div className="mt-12 max-w-[64rem] border-t border-edge-dark sm:mt-16">
           {t.items.map((item, i) => {
             const expanded = open === i;
             return (
-              <div key={item.q} className="border-b border-edge">
+              <div key={item.q} className="border-b border-edge-dark">
                 <h3>
                   <button
                     type="button"
@@ -33,12 +33,12 @@ export default function Faq({ dict }: { dict: Dictionary }) {
                     aria-controls={`faq-panel-${i}`}
                     className="group flex w-full items-start justify-between gap-8 py-6 text-left"
                   >
-                    <span className="max-w-[40ch] text-lead text-ink transition-colors duration-300 group-hover:text-ultra">
+                    <span className="max-w-[40ch] text-lead text-paper transition-colors duration-300 group-hover:text-ultra-bright">
                       {item.q}
                     </span>
                     <span
                       aria-hidden
-                      className="mt-2 block h-2.5 w-2.5 shrink-0 border-b border-r border-ink-faint transition-transform duration-400 ease-[cubic-bezier(.22,1,.36,1)]"
+                      className="mt-2 block h-2.5 w-2.5 shrink-0 border-b border-r border-paper-muted transition-transform duration-400 ease-[cubic-bezier(.22,1,.36,1)]"
                       style={{
                         transform: expanded
                           ? "rotate(-135deg) translateY(-2px)"
@@ -54,7 +54,7 @@ export default function Faq({ dict }: { dict: Dictionary }) {
                 >
                   <div className="overflow-hidden">
                     <p
-                      className="max-w-[62ch] pb-7 pr-8 text-body text-ink-muted"
+                      className="max-w-[62ch] pb-7 pr-8 text-body text-paper-muted"
                       style={{
                         opacity: expanded ? 1 : 0,
                         transition: "opacity 400ms ease",

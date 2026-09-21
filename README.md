@@ -116,8 +116,9 @@ src/
     [locale]/         tek sayfa; layout kök layout'tur (html/body burada)
     api/contact/      form uç noktası
     globals.css       renk, tipografi ve hareket tanımları
-    icon.svg          sekme simgesi
+    icon.png          sekme simgesi
   components/         bölümler: Hero, Works, Services, Process, Faq, Contact
+                      Ribbon.tsx — logodaki şerit motifi, hero arkasında
   config/site.ts      iletişim bilgileri
   content/
     dictionary.ts     bütün metinler (tr + en)
@@ -125,6 +126,8 @@ src/
     sections.ts       bölüm çapa adları
   proxy.ts            dilsiz adresleri /tr veya /en'e yönlendirir
 public/works/         iş görselleri
+public/brand/         logo
+images/logo.jpeg      marka panosu (kaynak)
 ```
 
 ### Tasarım kararları
@@ -132,13 +135,28 @@ public/works/         iş görselleri
 Renk, yazı tipi ve ölçek `src/app/globals.css` içindeki `@theme` bloğunda
 tanımlı. Oradaki bir değeri değiştirmek siteyi baştan aşağı etkiler.
 
+Palet ve yazı tipi **`images/logo.jpeg`** içindeki marka panosundan geliyor.
+Site koyu lacivert üzerine kurulu; tek açık bant iletişim bölümü.
+
 | Belirteç | Değer | Nerede |
 | --- | --- | --- |
-| `--color-paper` | `#ecedf3` | ana zemin |
-| `--color-ink` | `#0d1330` | yazı ve koyu bantlar |
-| `--color-ultra` | `#2536db` | tek vurgu rengi |
-| `--font-display` | Bricolage Grotesque | başlıklar |
-| `--font-text` | Instrument Sans | metin |
+| `--color-ink` | `#0f172a` | sayfa zemini |
+| `--color-ink-raised` | `#1e293b` | İşler ve Süreç bantları |
+| `--color-ink-deep` | `#080d1a` | alt bilgi |
+| `--color-paper` | `#e2e8f0` | koyu zeminde metin + iletişim bandı |
+| `--color-paper-muted` | `#94a3b8` | koyu zeminde ikincil metin |
+| `--color-ultra` | `#6366f1` | marka aksanı |
+| `--color-ultra-bright` | `#818cf8` | koyu zeminde aksan metin |
+| `--color-ultra-deep` | `#4f46e5` | dolgulu butonlar (beyaz metin AA geçsin diye) |
+| `--font-display` | Sora | başlıklar — panoda belirtilen yazı tipi |
+| `--font-text` | Instrument Sans | gövde metni |
+
+Logo `public/brand/colecta-mark.png`, sekme simgesi `src/app/icon.png`;
+ikisi de panodan kesildi. Kaynak dosya `images/logo.jpeg` olarak duruyor.
+
+Bütün metinler WCAG AA kontrast eşiğini geçiyor — düşük opaklıklı gri
+(`text-paper/40` gibi) yerine adlandırılmış `paper-muted` / `ink-muted`
+tonlarını kullanın, onlar ölçülerek seçildi.
 
 Hareket parçaları `src/components/motion/` altında toplandı:
 
