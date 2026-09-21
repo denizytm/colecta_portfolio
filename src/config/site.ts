@@ -19,9 +19,9 @@ export const site = {
   /** TODO: gerçek e-posta adresiniz */
   email: "merhaba@colecta.com.tr",
 
-  /** TODO: gerçek numaranız. Uluslararası biçim, boşluksuz. */
-  phoneE164: "+905000000000",
-  phoneDisplay: "+90 500 000 00 00",
+  /** Uluslararası biçim, boşluksuz — tel: ve WhatsApp bağlantıları bunu kullanır. */
+  phoneE164: "+905531310762",
+  phoneDisplay: "+90 553 131 07 62",
 
   instagram: "https://www.instagram.com/colectasoftware/",
   instagramHandle: "@colectasoftware",
@@ -33,6 +33,5 @@ export function whatsappUrl(message: string): string {
   return `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
 }
 
-/** İletişim bilgileri hâlâ örnek değerlerse true döner. */
-export const hasPlaceholderContact =
-  site.phoneE164 === "+905000000000" || site.email.startsWith("merhaba@colecta");
+/** E-posta hâlâ örnek değerse true döner. */
+export const hasPlaceholderEmail = site.email.startsWith("merhaba@colecta");
