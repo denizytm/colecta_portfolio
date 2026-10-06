@@ -13,11 +13,11 @@ export const site = {
   /** Marka panosundaki slogan. */
   tagline: "Build Together. Go Further.",
 
-  /** Yayına alınacak alan adı. OG etiketleri ve sitemap bunu kullanır. */
-  url: "https://colecta.com.tr", // TODO: gerçek alan adı
+  /** Alan adı. sitemap.xml, robots.txt ve paylaşım kartları bunu kullanır. */
+  url: "https://colectasoftware.com.tr",
 
-  /** TODO: gerçek e-posta adresiniz */
-  email: "merhaba@colecta.com.tr",
+  /** TODO: posta kutusu kurulunca doğrulayın — "merhaba" kısmı varsayım. */
+  email: "merhaba@colectasoftware.com.tr",
 
   /** Uluslararası biçim, boşluksuz — tel: ve WhatsApp bağlantıları bunu kullanır. */
   phoneE164: "+905531310762",
@@ -34,4 +34,4 @@ export function whatsappUrl(message: string): string {
 }
 
 /** E-posta hâlâ örnek değerse true döner. */
-export const hasPlaceholderEmail = site.email.startsWith("merhaba@colecta");
+export const hasPlaceholderEmail = site.email.startsWith("merhaba@colectasoftware");

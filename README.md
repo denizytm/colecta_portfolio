@@ -20,8 +20,8 @@ adresine yönlendirilirsiniz.
 Hepsi tek dosyada: **`src/config/site.ts`**
 
 ```ts
-url:          "https://colecta.com.tr"   // yayına alınan alan adı
-email:        "merhaba@colecta.com.tr"
+url:          "https://colectasoftware.com.tr"
+email:        "merhaba@colectasoftware.com.tr"
 phoneE164:    "+905000000000"            // WhatsApp ve tel: bağlantısı bunu kullanır
 phoneDisplay: "+90 500 000 00 00"        // ekranda görünen hâli
 ```
@@ -102,9 +102,20 @@ push'lar önizleme adresi üretir.
 Vercel'de **Settings → Domains** → alan adını yazın, ekrandaki DNS kayıtlarını
 alan adı sağlayıcınızda tanımlayın. SSL sertifikası otomatik geliyor.
 
-Alan adını bağladıktan sonra `src/config/site.ts` içindeki `url` alanını da
-güncelleyin — `sitemap.xml`, `robots.txt` ve paylaşım kartları bu değeri
-kullanıyor.
+Alan adı **colectasoftware.com.tr**, kayıt ve DNS yönetimi **Natro**'da
+(`ns1/ns2.natrohost.com`). Nameserver'ları Vercel'e taşımaya gerek yok;
+Natro panelinden yalnızca iki kaydı değiştirmek yeterli:
+
+| Tip | Ad | Değer |
+| --- | --- | --- |
+| `A` | `@` | Vercel panelinin gösterdiği IP |
+| `CNAME` | `www` | Vercel panelinin gösterdiği `*.vercel-dns-*.com` adresi |
+
+Değerleri Vercel **Settings → Domains** ekranından kopyalayın; her projeye
+özel olabiliyor, başka bir projenin kaydını kullanmayın.
+
+E-posta kurulduğunda `MX` kayıtlarına dokunmayın — yalnızca `A` ve `www`
+kaydı Vercel'e bakar.
 
 ---
 
