@@ -20,7 +20,7 @@ adresine yönlendirilirsiniz.
 Hepsi tek dosyada: **`src/config/site.ts`**
 
 ```ts
-url:          "https://colectasoftware.com.tr"
+url:          "https://www.colectasoftware.com.tr"
 email:        "merhaba@colectasoftware.com.tr"
 phoneE164:    "+905000000000"            // WhatsApp ve tel: bağlantısı bunu kullanır
 phoneDisplay: "+90 500 000 00 00"        // ekranda görünen hâli

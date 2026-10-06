@@ -14,7 +14,10 @@ export const site = {
   tagline: "Build Together. Go Further.",
 
   /** Alan adı. sitemap.xml, robots.txt ve paylaşım kartları bunu kullanır. */
-  url: "https://colectasoftware.com.tr",
+  /** www asıl adres; apex (www'suz) Vercel tarafında buraya 308 ile
+      yönleniyor. canonical ve sitemap yönlendirme hedefini değil,
+      son adresi göstermeli. */
+  url: "https://www.colectasoftware.com.tr",
 
   /** TODO: posta kutusu kurulunca doğrulayın — "merhaba" kısmı varsayım. */
   email: "merhaba@colectasoftware.com.tr",
