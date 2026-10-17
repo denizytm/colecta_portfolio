@@ -29,9 +29,15 @@ const tr = {
     close: "Kapat",
     skipToContent: "İçeriğe geç",
   },
+  brand: {
+    tagline: "Build Together. Go Further.",
+    lead: "Küçük ve orta ölçekli işletmeler için dijital atölye. Web sitesi, e-ticaret ve mobil uygulama; tasarımdan alan adına, yayına kadar tek elden.",
+    primaryCta: "Teklif alın",
+    secondaryCta: "İşlere bakın",
+  },
   hero: {
     lines: ["Yapılmış işlerin", "koleksiyonu."],
-    lead: "İşletmeniz için web sitesi ve mobil uygulama yapıyoruz. Tasarımdan alan adına, yayına kadar tek elden.",
+    lead: "Teslim edilen her iş; sahibi, teknolojisi ve teslim tarihiyle birlikte açık bir kayıt olarak koleksiyona ekleniyor.",
     primaryCta: "Teklif alın",
     secondaryCta: "İşlere bakın",
     scrollHint: "Koleksiyon",
@@ -234,9 +240,15 @@ const en: Dictionary = {
     close: "Close",
     skipToContent: "Skip to content",
   },
+  brand: {
+    tagline: "Build Together. Go Further.",
+    lead: "A digital studio for small and medium businesses. Websites, e-commerce and mobile apps — from design to domain to launch, end to end.",
+    primaryCta: "Ask for a quote",
+    secondaryCta: "See the work",
+  },
   hero: {
     lines: ["A collection of", "the work."],
-    lead: "We build websites and mobile apps for businesses. Design, domain and launch, handled end to end.",
+    lead: "Every delivered project enters the collection as an open record — with its owner, its stack and its delivery date.",
     primaryCta: "Ask for a quote",
     secondaryCta: "See the work",
     scrollHint: "Collection",

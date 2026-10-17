@@ -3,6 +3,7 @@ import { getDictionary, isLocale } from "@/content/dictionary";
 import { site } from "@/config/site";
 import { works } from "@/content/works";
 import Header from "@/components/Header";
+import Brand from "@/components/Brand";
 import Hero from "@/components/Hero";
 import Works from "@/components/Works";
 import Services from "@/components/Services";
@@ -59,6 +60,7 @@ export default async function Page({
       <ScrollProgress />
       <Header locale={locale} dict={dict} />
       <main id="main">
+        <Brand dict={dict} />
         <Hero locale={locale} dict={dict} />
         <Works locale={locale} dict={dict} />
         <Services dict={dict} />

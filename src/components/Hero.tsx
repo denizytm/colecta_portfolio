@@ -1,10 +1,7 @@
 import type { Dictionary, Locale } from "@/content/dictionary";
 import { works } from "@/content/works";
-import { sectionIds } from "@/content/sections";
 import Vitrine from "./Vitrine";
-import Ribbon from "./Ribbon";
 import RevealText from "./motion/RevealText";
-import Magnetic from "./motion/Magnetic";
 
 export default function Hero({
   locale,
@@ -16,18 +13,16 @@ export default function Hero({
   const featured = works[0];
 
   // One choreography on arrival: the headline sets itself word by word, then
-  // the sentence and the controls follow it in.
+  // the sentence follows it in.
   const wordsInFirstLine = dict.hero.lines[0].split(" ").length;
   const secondLineDelay = wordsInFirstLine * 0.055;
 
   return (
-    <section className="relative overflow-hidden pt-28 sm:pt-36 xl:pt-44">
-      <Ribbon />
-
+    <section className="relative overflow-hidden pt-16 sm:pt-24 xl:pt-28">
       <div className="mx-auto max-w-[88rem] px-5 sm:px-8 xl:px-12">
         <div className="grid items-center gap-14 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.92fr)] lg:gap-16">
           <div>
-            <h1 className="display text-[clamp(2.9rem,8.4vw,7rem)] text-paper">
+            <h2 className="display text-[clamp(2.3rem,6.6vw,5.5rem)] text-paper">
               {dict.hero.lines.map((line, i) => (
                 <RevealText
                   key={line}
@@ -37,7 +32,7 @@ export default function Hero({
                   className="block"
                 />
               ))}
-            </h1>
+            </h2>
 
             <p
               className="animate-line-rise mt-8 max-w-[46ch] text-lead text-paper-muted"
@@ -45,28 +40,6 @@ export default function Hero({
             >
               {dict.hero.lead}
             </p>
-
-            <div
-              className="animate-line-rise mt-10 flex flex-wrap items-center gap-4"
-              style={{ animationDelay: "680ms" }}
-            >
-              <Magnetic>
-                <a
-                  href={`#${sectionIds.contact}`}
-                  className="inline-block rounded-full bg-ultra-deep px-7 py-3.5 text-body text-white transition-colors duration-300 hover:bg-paper hover:text-ink"
-                >
-                  {dict.hero.primaryCta}
-                </a>
-              </Magnetic>
-              <Magnetic strength={0.2}>
-                <a
-                  href={`#${sectionIds.works}`}
-                  className="rule-link inline-block px-1 py-3.5 text-body text-paper"
-                >
-                  {dict.hero.secondaryCta}
-                </a>
-              </Magnetic>
-            </div>
           </div>
 
           {featured && (
