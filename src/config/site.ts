@@ -19,8 +19,7 @@ export const site = {
       son adresi göstermeli. */
   url: "https://www.colectasoftware.com.tr",
 
-  /** TODO: posta kutusu kurulunca doğrulayın — "merhaba" kısmı varsayım. */
-  email: "merhaba@colectasoftware.com.tr",
+  email: "colectasoftware@gmail.com",
 
   /** Uluslararası biçim, boşluksuz — tel: ve WhatsApp bağlantıları bunu kullanır. */
   phoneE164: "+905531310762",
@@ -36,5 +35,4 @@ export function whatsappUrl(message: string): string {
   return `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
 }
 
-/** E-posta hâlâ örnek değerse true döner. */
-export const hasPlaceholderEmail = site.email.startsWith("merhaba@colectasoftware");
+export const hasPlaceholderEmail = false;
